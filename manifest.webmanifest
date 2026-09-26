@@ -1,0 +1,9 @@
+{
+  "name": "BrainForge",
+  "short_name": "BrainForge",
+  "description": "Local-first brain training for memory, math, science, GK, computer science and coding.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#070b14",
+  "theme_color": "#0b1020"
+}
