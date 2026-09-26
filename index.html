@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="BrainForge — local-first brain training for math, science, GK, computer science and coding." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>BrainForge</title>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">BF</div>
+        <div><strong>BrainForge</strong><span>Train • Learn • Remember</span></div>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-btn active" data-view="home">⌂ <span>Dashboard</span></button>
+        <button class="nav-btn" data-view="train">⚡ <span>Daily Training</span></button>
+        <button class="nav-btn" data-view="subjects">◫ <span>Subjects</span></button>
+        <button class="nav-btn" data-view="review">🧠 <span>Memory Review</span></button>
+        <button class="nav-btn" data-view="listen">🔊 <span>Listening Mode</span></button>
+        <button class="nav-btn" data-view="progress">↗ <span>Progress</span></button>
+        <button class="nav-btn" data-view="settings">⚙ <span>Settings</span></button>
+      </nav>
+      <div class="privacy-card"><span>🔒 Local-first</span><small>Your progress stays on this device.</small></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-only" id="menuBtn" aria-label="Open menu">☰</button>
+        <div><div class="eyebrow" id="todayLabel">TODAY</div><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="top-actions">
+          <button class="icon-btn" id="focusToggle" title="Grayscale focus mode">◐</button>
+          <div class="level-pill"><span>LV</span><b id="overallLevel">1</b></div>
+        </div>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="hero card">
+          <div>
+            <span class="chip">LOCAL BRAIN TRAINING</span>
+            <h2>Build a brain that remembers.</h2>
+            <p>Short focused sessions, active recall, spaced repetition, mental math and real coding practice.</p>
+            <div class="hero-actions">
+              <button class="btn primary" id="startDailyBtn">Start today's training</button>
+              <button class="btn ghost" data-jump="review">Review weak topics</button>
+            </div>
+          </div>
+          <div class="brain-orb" aria-hidden="true"><div class="orb-core">🧠</div><span class="orbit o1"></span><span class="orbit o2"></span><span class="orbit o3"></span></div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat card"><span>🔥 Streak</span><strong id="streakStat">0 days</strong><small>Consistency beats cramming.</small></article>
+          <article class="stat card"><span>🧠 Memory</span><strong id="memoryStat">0%</strong><small>Based on review strength.</small></article>
+          <article class="stat card"><span>⚡ Today</span><strong id="todayStat">0 questions</strong><small>Your focused reps today.</small></article>
+          <article class="stat card"><span>⏱ Avg response</span><strong id="speedStat">—</strong><small>Correct first, then faster.</small></article>
+        </div>
+
+        <div class="two-col">
+          <section class="card panel">
+            <div class="panel-head"><div><span class="eyebrow">TODAY'S PLAN</span><h3>20-minute brain workout</h3></div><span class="ring" id="dailyRing">0%</span></div>
+            <div class="plan-list">
+              <button class="plan-row" data-session="math"><span class="subject-icon math">∑</span><span><b>Mental Math</b><small>Speed + accuracy</small></span><em>5 min</em></button>
+              <button class="plan-row" data-session="review"><span class="subject-icon memory">🧠</span><span><b>Memory Recall</b><small>Due concepts</small></span><em>5 min</em></button>
+              <button class="plan-row" data-session="science"><span class="subject-icon science">⚗</span><span><b>Science</b><small>Understand + explain</small></span><em>5 min</em></button>
+              <button class="plan-row" data-session="coding"><span class="subject-icon coding">&lt;/&gt;</span><span><b>Coding</b><small>Think like a programmer</small></span><em>5 min</em></button>
+            </div>
+          </section>
+          <section class="card panel">
+            <div class="panel-head"><div><span class="eyebrow">MEMORY QUEUE</span><h3>What your brain needs next</h3></div><button class="text-btn" data-jump="review">Open review →</button></div>
+            <div id="duePreview" class="empty-state">No reviews yet. Start a training session.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-train">
+        <div class="section-intro"><span class="chip">NO-HELP MODE</span><h2>One question. One answer. No scrolling for clues.</h2><p>Answer from memory first. Explanations appear after you submit.</p></div>
+        <div id="trainer" class="card trainer">
+          <div class="trainer-top"><span id="trainerSubject" class="chip">MIXED</span><span id="trainerCounter">1 / 10</span></div>
+          <div class="progress-track"><div id="trainerProgress"></div></div>
+          <div class="question-zone"><p class="eyebrow" id="questionSkill">ACTIVE RECALL</p><h2 id="questionText">Press Start to begin.</h2><div id="questionPromptExtra"></div></div>
+          <form id="answerForm" class="answer-row"><input id="answerInput" autocomplete="off" placeholder="Type your answer…" disabled /><button class="btn primary" id="submitAnswer" disabled>Check</button></form>
+          <div id="feedback" class="feedback hidden"></div>
+          <div class="trainer-actions"><button class="btn ghost" id="startSessionBtn">Start mixed session</button><button class="btn ghost hidden" id="nextQuestionBtn">Next question</button></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-subjects">
+        <div class="section-intro"><span class="eyebrow">CHOOSE A SUBJECT</span><h2>Train skills separately, then mix them together.</h2></div>
+        <div class="subject-grid" id="subjectGrid"></div>
+      </section>
+
+      <section class="view" id="view-review">
+        <div class="section-intro"><span class="chip">SPACED REPETITION</span><h2>Review right before you forget.</h2><p>Correct answers move farther apart. Missed concepts come back sooner.</p></div>
+        <div class="card review-card"><div class="panel-head"><div><span class="eyebrow">DUE NOW</span><h3 id="dueCount">0 concepts</h3></div><button class="btn primary" id="startReviewBtn">Start review</button></div><div id="reviewList" class="review-list"></div></div>
+      </section>
+
+      <section class="view" id="view-listen">
+        <div class="section-intro"><span class="chip">🔊 LISTENING MODE</span><h2>Listen, then prove you remember.</h2><p>Uses your device's built-in text-to-speech. No account or cloud AI required.</p></div>
+        <div class="listen-layout">
+          <section class="card listen-card">
+            <div class="listen-toolbar"><select id="listenTopic" aria-label="Choose lesson"></select><select id="voiceSelect" aria-label="Choose voice"></select><label>Speed<select id="speechRate"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label></div>
+            <article id="listenText" class="listen-text" tabindex="0"></article>
+            <div class="audio-controls"><button class="btn ghost" id="prevSentence">⏮</button><button class="btn primary" id="playSpeech">▶ Listen</button><button class="btn ghost" id="pauseSpeech">⏸</button><button class="btn ghost" id="nextSentence">⏭</button><button class="btn ghost" id="repeatSentence">↻ Repeat</button></div>
+          </section>
+          <aside class="card recall-box"><span class="eyebrow">AFTER LISTENING</span><h3>🧠 No-looking recall</h3><p id="listenRecallQuestion">Listen to a lesson first.</p><textarea id="listenRecallAnswer" placeholder="Explain it from memory…"></textarea><button class="btn primary" id="checkRecallBtn">Reveal answer</button><div id="listenRecallFeedback" class="feedback hidden"></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-progress">
+        <div class="section-intro"><span class="eyebrow">YOUR DATA</span><h2>Progress, not fake completion.</h2></div>
+        <div class="stats-grid">
+          <article class="stat card"><span>Total attempts</span><strong id="totalAttempts">0</strong><small>Every real answer counts.</small></article>
+          <article class="stat card"><span>Correct</span><strong id="totalCorrect">0</strong><small>Accuracy over tapping complete.</small></article>
+          <article class="stat card"><span>Accuracy</span><strong id="overallAccuracy">0%</strong><small>Across all subjects.</small></article>
+          <article class="stat card"><span>Best streak</span><strong id="bestStreak">0 days</strong><small>Stored locally.</small></article>
+        </div>
+        <div class="card panel"><div class="panel-head"><div><span class="eyebrow">SUBJECT MASTERY</span><h3>Where to focus next</h3></div></div><div id="masteryBars" class="mastery-bars"></div></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="section-intro"><span class="eyebrow">LOCAL SETTINGS</span><h2>Make BrainForge fit your focus.</h2></div>
+        <div class="settings-grid">
+          <section class="card setting-card"><h3>Focus</h3><label class="switch-row"><span><b>Grayscale mode</b><small>Reduce visual stimulation.</small></span><input type="checkbox" id="grayscaleSetting" /></label><label class="switch-row"><span><b>Reduce motion</b><small>Calmer transitions.</small></span><input type="checkbox" id="motionSetting" /></label></section>
+          <section class="card setting-card"><h3>Data</h3><p>Your attempts, mastery and review schedule are stored in IndexedDB on this device.</p><div class="stack-actions"><button class="btn ghost" id="exportBtn">Export backup</button><label class="btn ghost file-btn">Import backup<input type="file" id="importInput" accept=".json,application/json" /></label><button class="btn danger" id="resetBtn">Reset local progress</button></div></section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
