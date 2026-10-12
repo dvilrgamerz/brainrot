@@ -1,3 +1,8 @@
+<!-- DVILR PROJECT COVER v1 -->
+<p align="center"><img src="./assets/dvilr-project-banner.svg" width="100%" alt="BrainForge: Train recall, focus and knowledge through practice." /></p>
+<p align="center"><a href="https://github.com/dvilrgamerz"><strong>Developer profile</strong></a> · <a href="https://github.com/dvilrgamerz/brainrot"><strong>Source</strong></a></p>
+<!-- /DVILR PROJECT COVER -->
+
 # BrainForge 🧠
 
 **Train. Learn. Remember.**
