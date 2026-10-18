@@ -309,7 +309,7 @@ function loadQuestion() {
   const progress = $('#trainerProgress');
   if (progress) progress.style.width = ((state.sessionIndex / state.session.length) * 100) + '%';
   setText('#questionSkill', (q.topic || q.skill || 'ACTIVE RECALL').toUpperCase());
-  setText('#questionText', q.q);
+  setText('#questionText', q.q || q.question);
 
   // Show code block if question has code
   const codeBlock = $('#codeBlock');
@@ -899,7 +899,9 @@ function checkListenRecall() {
 function initFocusView() {
   updateFocusTimerDisplay();
   if (!state.focus.session.length) {
-    startFocusSession();
+    state.focus.session = [...QUESTIONS].sort(() => Math.random() - 0.5).slice(0, 15);
+    state.focus.sessionIndex = 0;
+    setText('#focusQuestionText', 'Enter the zone. Press Start to initiate focus reps.');
   }
 }
 
@@ -938,8 +940,10 @@ function exitFocusMode() {
 }
 
 function startFocusSession() {
-  state.focus.session = [...QUESTIONS].sort(() => Math.random() - 0.5).slice(0, 15);
-  state.focus.sessionIndex = 0;
+  if (!state.focus.session.length) {
+    state.focus.session = [...QUESTIONS].sort(() => Math.random() - 0.5).slice(0, 15);
+    state.focus.sessionIndex = 0;
+  }
   startFocusTimer();
   loadFocusQuestion();
 }
@@ -958,7 +962,7 @@ function loadFocusQuestion() {
 
   setText('#focusSubject', (SUBJECTS[q.subject]?.name || q.subject).toUpperCase());
   setText('#focusCounter', 'Question ' + (state.focus.sessionIndex + 1) + ' / ' + state.focus.session.length);
-  setText('#focusQuestionText', q.q);
+  setText('#focusQuestionText', q.q || q.question);
 
   const codeContainer = $('#focusCodeBlockContainer');
   const codeBlock = $('#focusCodeBlock');
@@ -1408,7 +1412,7 @@ function bindEvents() {
   });
 
   // Focus mode controls
-  $('#focusStartBtn')?.addEventListener('click', startFocusTimer);
+  $('#focusStartBtn')?.addEventListener('click', startFocusSession);
   $('#focusPauseBtn')?.addEventListener('click', pauseFocusTimer);
   $('#focusExitBtn')?.addEventListener('click', exitFocusMode);
   $('#focusGrayscaleToggle')?.addEventListener('click', () => saveSettings({ grayscale: !settings().grayscale }));

@@ -933,8 +933,10 @@ export function generateMathQuestion(topic, difficulty, seed = null) {
     subtopic: details.subtopic,
     difficulty: diff,
     type: 'short-answer',
+    q: details.question,
     question: details.question,
     answers: details.answers,
+    explain: details.explanation,
     explanation: details.explanation,
     dynamic: true,
   };
