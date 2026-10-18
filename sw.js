@@ -1,7 +1,14 @@
 // BrainForge PWA: same-origin shell only, offline navigation, bounded cache.
-const CACHE = 'brainforge-v2';
+const CACHE = 'brainforge-v3';
 const PREFIX = 'brainforge-';
-const CORE = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest'];
+const CORE = [
+  './', './index.html', './styles.css', './manifest.webmanifest',
+  './js/app.js', './js/db.js', './js/questions.js', './js/math-engine.js',
+  './js/srs.js', './js/adaptive.js', './js/validator.js',
+  './js/trainer.js', './js/review.js', './js/listen.js',
+  './js/analytics.js', './js/planner.js', './js/focus.js',
+  './js/library.js', './js/settings.js', './js/utils.js'
+];
 const corePaths = new Set(CORE.map(path => new URL(path, self.location.href).pathname));
 
 self.addEventListener('install', event => {

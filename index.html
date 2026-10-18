@@ -3,135 +3,715 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0b1020" />
   <meta name="description" content="BrainForge — local-first brain training for math, science, GK, computer science and coding." />
   <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.svg" />
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/icon-192.svg" />
   <link rel="stylesheet" href="./styles.css" />
   <title>BrainForge</title>
 </head>
 <body>
-  <div class="bg-grid"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="bg-grid" aria-hidden="true"></div>
+
   <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
       <div class="brand">
-        <div class="brand-mark">BF</div>
-        <div><strong>BrainForge</strong><span>Train • Learn • Remember</span></div>
+        <div class="brand-mark" aria-hidden="true">BF</div>
+        <div>
+          <strong>BrainForge</strong>
+          <span>Train • Learn • Remember</span>
+        </div>
       </div>
+
       <nav class="nav" aria-label="Main navigation">
-        <button class="nav-btn active" data-view="home">⌂ <span>Dashboard</span></button>
-        <button class="nav-btn" data-view="train">⚡ <span>Daily Training</span></button>
-        <button class="nav-btn" data-view="subjects">◫ <span>Subjects</span></button>
-        <button class="nav-btn" data-view="review">🧠 <span>Memory Review</span></button>
-        <button class="nav-btn" data-view="listen">🔊 <span>Listening Mode</span></button>
-        <button class="nav-btn" data-view="progress">↗ <span>Progress</span></button>
-        <button class="nav-btn" data-view="settings">⚙ <span>Settings</span></button>
+        <button type="button" class="nav-btn active" data-view="home" aria-label="Dashboard view">
+          <span class="nav-icon" aria-hidden="true">⌂</span>
+          <span>Dashboard</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="train" aria-label="Daily Training view">
+          <span class="nav-icon" aria-hidden="true">⚡</span>
+          <span>Training</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="subjects" aria-label="Subjects view">
+          <span class="nav-icon" aria-hidden="true">◫</span>
+          <span>Subjects</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="review" aria-label="Memory Review view">
+          <span class="nav-icon" aria-hidden="true">🧠</span>
+          <span>Memory Review</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="listen" aria-label="Listening Mode view">
+          <span class="nav-icon" aria-hidden="true">🔊</span>
+          <span>Listening</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="focus" aria-label="Focus Mode view">
+          <span class="nav-icon" aria-hidden="true">🎯</span>
+          <span>Focus</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="progress" aria-label="Progress view">
+          <span class="nav-icon" aria-hidden="true">↗</span>
+          <span>Progress</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="planner" aria-label="Study Planner view">
+          <span class="nav-icon" aria-hidden="true">📅</span>
+          <span>Planner</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="library" aria-label="Content Library view">
+          <span class="nav-icon" aria-hidden="true">📚</span>
+          <span>Library</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="settings" aria-label="Settings view">
+          <span class="nav-icon" aria-hidden="true">⚙</span>
+          <span>Settings</span>
+        </button>
       </nav>
-      <div class="privacy-card"><span>🔒 Local-first</span><small>Your progress stays on this device.</small></div>
+
+      <div class="privacy-card">
+        <span class="privacy-title">🔒 Local-first</span>
+        <small>Your progress stays on this device.</small>
+      </div>
     </aside>
 
-    <main class="main">
+    <main class="main" id="main-content" tabindex="-1">
       <header class="topbar">
-        <button class="icon-btn mobile-only" id="menuBtn" aria-label="Open menu">☰</button>
-        <div><div class="eyebrow" id="todayLabel">TODAY</div><h1 id="pageTitle">Dashboard</h1></div>
+        <button type="button" class="icon-btn mobile-only" id="menuBtn" aria-label="Open navigation menu">☰</button>
+        <div class="topbar-title-wrap">
+          <div class="eyebrow" id="todayLabel">TODAY</div>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
         <div class="top-actions">
-          <button class="icon-btn" id="focusToggle" title="Grayscale focus mode">◐</button>
-          <div class="level-pill"><span>LV</span><b id="overallLevel">1</b></div>
+          <button type="button" class="icon-btn" id="themeToggle" title="Toggle color theme" aria-label="Toggle color theme">☀️</button>
+          <button type="button" class="icon-btn" id="focusToggle" title="Toggle grayscale mode" aria-label="Toggle grayscale mode">◐</button>
+          <div class="level-pill" aria-label="BrainForge current level">
+            <span>LV</span>
+            <b id="overallLevel">1</b>
+          </div>
         </div>
       </header>
 
-      <section class="view active" id="view-home">
+      <!-- 1. DASHBOARD VIEW -->
+      <section class="view active" id="view-home" aria-labelledby="pageTitle">
         <div class="hero card">
-          <div>
+          <div class="hero-content">
             <span class="chip">LOCAL BRAIN TRAINING</span>
             <h2>Build a brain that remembers.</h2>
             <p>Short focused sessions, active recall, spaced repetition, mental math and real coding practice.</p>
             <div class="hero-actions">
-              <button class="btn primary" id="startDailyBtn">Start today's training</button>
-              <button class="btn ghost" data-jump="review">Review weak topics</button>
+              <button type="button" class="btn primary" id="startDailyBtn">Start today's training</button>
+              <button type="button" class="btn ghost" data-jump="review">Review weak topics</button>
+              <button type="button" class="btn ghost" data-jump="planner">Custom plan</button>
             </div>
           </div>
-          <div class="brain-orb" aria-hidden="true"><div class="orb-core">🧠</div><span class="orbit o1"></span><span class="orbit o2"></span><span class="orbit o3"></span></div>
+          <div class="brain-orb" aria-hidden="true">
+            <div class="orb-core">🧠</div>
+            <span class="orbit o1"></span>
+            <span class="orbit o2"></span>
+            <span class="orbit o3"></span>
+          </div>
         </div>
 
         <div class="stats-grid">
-          <article class="stat card"><span>🔥 Streak</span><strong id="streakStat">0 days</strong><small>Consistency beats cramming.</small></article>
-          <article class="stat card"><span>🧠 Memory</span><strong id="memoryStat">0%</strong><small>Based on review strength.</small></article>
-          <article class="stat card"><span>⚡ Today</span><strong id="todayStat">0 questions</strong><small>Your focused reps today.</small></article>
-          <article class="stat card"><span>⏱ Avg response</span><strong id="speedStat">—</strong><small>Correct first, then faster.</small></article>
+          <article class="stat card">
+            <span class="stat-label">🔥 Streak</span>
+            <strong id="streakStat" class="stat-value">0 days</strong>
+            <small>Consistency beats cramming.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">🧠 Memory</span>
+            <strong id="memoryStat" class="stat-value">0%</strong>
+            <small>Based on review strength.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">⚡ Today</span>
+            <strong id="todayStat" class="stat-value">0 questions</strong>
+            <small>Your focused reps today.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">⏱ Avg response</span>
+            <strong id="speedStat" class="stat-value">—</strong>
+            <small>Correct first, then faster.</small>
+          </article>
         </div>
 
         <div class="two-col">
-          <section class="card panel">
-            <div class="panel-head"><div><span class="eyebrow">TODAY'S PLAN</span><h3>20-minute brain workout</h3></div><span class="ring" id="dailyRing">0%</span></div>
+          <section class="card panel" aria-labelledby="todayPlanHeading">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">TODAY'S PLAN</span>
+                <h3 id="todayPlanHeading">20-minute brain workout</h3>
+              </div>
+              <span class="ring" id="dailyRing" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Daily plan completion">0%</span>
+            </div>
             <div class="plan-list">
-              <button class="plan-row" data-session="math"><span class="subject-icon math">∑</span><span><b>Mental Math</b><small>Speed + accuracy</small></span><em>5 min</em></button>
-              <button class="plan-row" data-session="review"><span class="subject-icon memory">🧠</span><span><b>Memory Recall</b><small>Due concepts</small></span><em>5 min</em></button>
-              <button class="plan-row" data-session="science"><span class="subject-icon science">⚗</span><span><b>Science</b><small>Understand + explain</small></span><em>5 min</em></button>
-              <button class="plan-row" data-session="coding"><span class="subject-icon coding">&lt;/&gt;</span><span><b>Coding</b><small>Think like a programmer</small></span><em>5 min</em></button>
+              <button type="button" class="plan-row" data-session="math" aria-label="Mental Math session, 5 minutes">
+                <span class="subject-icon math" aria-hidden="true">∑</span>
+                <span><b>Mental Math</b><small>Speed + accuracy</small></span>
+                <em>5 min</em>
+              </button>
+              <button type="button" class="plan-row" data-session="review" aria-label="Memory Recall session, 5 minutes">
+                <span class="subject-icon memory" aria-hidden="true">🧠</span>
+                <span><b>Memory Recall</b><small>Due concepts</small></span>
+                <em>5 min</em>
+              </button>
+              <button type="button" class="plan-row" data-session="science" aria-label="Science session, 5 minutes">
+                <span class="subject-icon science" aria-hidden="true">⚗</span>
+                <span><b>Science</b><small>Understand + explain</small></span>
+                <em>5 min</em>
+              </button>
+              <button type="button" class="plan-row" data-session="coding" aria-label="Coding session, 5 minutes">
+                <span class="subject-icon coding" aria-hidden="true">&lt;/&gt;</span>
+                <span><b>Coding</b><small>Think like a programmer</small></span>
+                <em>5 min</em>
+              </button>
             </div>
           </section>
-          <section class="card panel">
-            <div class="panel-head"><div><span class="eyebrow">MEMORY QUEUE</span><h3>What your brain needs next</h3></div><button class="text-btn" data-jump="review">Open review →</button></div>
+
+          <section class="card panel" aria-labelledby="memoryQueueHeading">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">MEMORY QUEUE</span>
+                <h3 id="memoryQueueHeading">What your brain needs next</h3>
+              </div>
+              <button type="button" class="text-btn" data-jump="review" aria-label="Go to Memory Review">Open review →</button>
+            </div>
             <div id="duePreview" class="empty-state">No reviews yet. Start a training session.</div>
           </section>
         </div>
       </section>
 
-      <section class="view" id="view-train">
-        <div class="section-intro"><span class="chip">NO-HELP MODE</span><h2>One question. One answer. No scrolling for clues.</h2><p>Answer from memory first. Explanations appear after you submit.</p></div>
+      <!-- 2. DAILY TRAINING VIEW -->
+      <section class="view" id="view-train" aria-labelledby="trainerHeading">
+        <div class="section-intro">
+          <span class="chip">NO-HELP MODE</span>
+          <h2 id="trainerHeading">One question. One answer. No scrolling for clues.</h2>
+          <p>Answer from memory first. Explanations appear after you submit.</p>
+        </div>
+
         <div id="trainer" class="card trainer">
-          <div class="trainer-top"><span id="trainerSubject" class="chip">MIXED</span><span id="trainerCounter">1 / 10</span></div>
-          <div class="progress-track"><div id="trainerProgress"></div></div>
-          <div class="question-zone"><p class="eyebrow" id="questionSkill">ACTIVE RECALL</p><h2 id="questionText">Press Start to begin.</h2><div id="questionPromptExtra"></div></div>
-          <form id="answerForm" class="answer-row"><input id="answerInput" autocomplete="off" placeholder="Type your answer…" disabled /><button class="btn primary" id="submitAnswer" disabled>Check</button></form>
-          <div id="feedback" class="feedback hidden"></div>
-          <div class="trainer-actions"><button class="btn ghost" id="startSessionBtn">Start mixed session</button><button class="btn ghost hidden" id="nextQuestionBtn">Next question</button></div>
+          <div class="trainer-top">
+            <span id="trainerSubject" class="chip">MIXED</span>
+            <span id="trainerCounter" class="counter-badge">1 / 10</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Session progress">
+            <div id="trainerProgress"></div>
+          </div>
+
+          <div class="question-zone">
+            <p class="eyebrow" id="questionSkill">ACTIVE RECALL</p>
+            <h2 id="questionText">Press Start to begin.</h2>
+            <div id="questionPromptExtra"></div>
+            <pre class="code-block hidden" id="codeContainer"><code id="codeBlock"></code></pre>
+          </div>
+
+          <!-- Multiple choice container (hidden by default) -->
+          <div class="choices-grid hidden" id="choicesGrid" role="group" aria-label="Multiple choice options"></div>
+
+          <!-- Text answer input form -->
+          <form id="answerForm" class="answer-row">
+            <label for="answerInput" class="sr-only">Type your answer</label>
+            <input type="text" id="answerInput" autocomplete="off" placeholder="Type your answer…" disabled />
+            <button type="submit" class="btn primary" id="submitAnswer" disabled>Check</button>
+          </form>
+
+          <!-- Feedback notification panel -->
+          <div id="feedback" class="feedback hidden" role="region" aria-live="polite"></div>
+
+          <!-- 4-Button SRS Rating Bar (hidden until answer is graded) -->
+          <div class="srs-container hidden" id="srsButtons" role="group" aria-label="Spaced repetition recall ratings" aria-live="polite">
+            <p class="srs-prompt">How well did you recall this concept?</p>
+            <div class="srs-buttons">
+              <button type="button" class="srs-btn srs-again" data-rating="again" id="srsAgain" aria-label="Rate recall Again, repeat in under 10 minutes">
+                <span class="srs-label">Again</span>
+                <small class="srs-time">&lt;10m</small>
+              </button>
+              <button type="button" class="srs-btn srs-hard" data-rating="hard" id="srsHard" aria-label="Rate recall Hard, review in 1 day">
+                <span class="srs-label">Hard</span>
+                <small class="srs-time">1d</small>
+              </button>
+              <button type="button" class="srs-btn srs-good" data-rating="good" id="srsGood" aria-label="Rate recall Good, review in 3 days">
+                <span class="srs-label">Good</span>
+                <small class="srs-time">3d</small>
+              </button>
+              <button type="button" class="srs-btn srs-easy" data-rating="easy" id="srsEasy" aria-label="Rate recall Easy, review in 7 days">
+                <span class="srs-label">Easy</span>
+                <small class="srs-time">7d</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="trainer-actions">
+            <button type="button" class="btn ghost" id="startSessionBtn">Start mixed session</button>
+            <button type="button" class="btn primary hidden" id="nextQuestionBtn">Next question →</button>
+          </div>
+
+          <!-- Session summary container (shown when session completes) -->
+          <div id="sessionSummary" class="session-summary hidden" role="region" aria-live="polite"></div>
         </div>
       </section>
 
-      <section class="view" id="view-subjects">
-        <div class="section-intro"><span class="eyebrow">CHOOSE A SUBJECT</span><h2>Train skills separately, then mix them together.</h2></div>
+      <!-- 3. SUBJECTS VIEW -->
+      <section class="view" id="view-subjects" aria-labelledby="subjectsHeading">
+        <div class="section-intro">
+          <span class="eyebrow">CHOOSE A SUBJECT</span>
+          <h2 id="subjectsHeading">Train skills separately, then mix them together.</h2>
+        </div>
         <div class="subject-grid" id="subjectGrid"></div>
       </section>
 
-      <section class="view" id="view-review">
-        <div class="section-intro"><span class="chip">SPACED REPETITION</span><h2>Review right before you forget.</h2><p>Correct answers move farther apart. Missed concepts come back sooner.</p></div>
-        <div class="card review-card"><div class="panel-head"><div><span class="eyebrow">DUE NOW</span><h3 id="dueCount">0 concepts</h3></div><button class="btn primary" id="startReviewBtn">Start review</button></div><div id="reviewList" class="review-list"></div></div>
+      <!-- 4. MEMORY REVIEW VIEW -->
+      <section class="view" id="view-review" aria-labelledby="reviewHeading">
+        <div class="section-intro">
+          <span class="chip">SPACED REPETITION</span>
+          <h2 id="reviewHeading">Review right before you forget.</h2>
+          <p>Correct answers move farther apart. Missed concepts come back sooner.</p>
+        </div>
+        <div class="card review-card">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">DUE NOW</span>
+              <h3 id="dueCount">0 concepts</h3>
+            </div>
+            <button type="button" class="btn primary" id="startReviewBtn">Start review</button>
+          </div>
+          <div id="reviewList" class="review-list"></div>
+        </div>
       </section>
 
-      <section class="view" id="view-listen">
-        <div class="section-intro"><span class="chip">🔊 LISTENING MODE</span><h2>Listen, then prove you remember.</h2><p>Uses your device's built-in text-to-speech. No account or cloud AI required.</p></div>
+      <!-- 5. LISTENING MODE VIEW -->
+      <section class="view" id="view-listen" aria-labelledby="listenHeading">
+        <div class="section-intro">
+          <span class="chip">🔊 LISTENING MODE</span>
+          <h2 id="listenHeading">Listen, then prove you remember.</h2>
+          <p>Uses your device's built-in text-to-speech. No account or cloud AI required.</p>
+        </div>
         <div class="listen-layout">
-          <section class="card listen-card">
-            <div class="listen-toolbar"><select id="listenTopic" aria-label="Choose lesson"></select><select id="voiceSelect" aria-label="Choose voice"></select><label>Speed<select id="speechRate"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label></div>
-            <article id="listenText" class="listen-text" tabindex="0"></article>
-            <div class="audio-controls"><button class="btn ghost" id="prevSentence">⏮</button><button class="btn primary" id="playSpeech">▶ Listen</button><button class="btn ghost" id="pauseSpeech">⏸</button><button class="btn ghost" id="nextSentence">⏭</button><button class="btn ghost" id="repeatSentence">↻ Repeat</button></div>
+          <section class="card listen-card" aria-label="Audio player and transcription">
+            <div class="listen-toolbar">
+              <label for="listenTopic" class="sr-only">Choose lesson</label>
+              <select id="listenTopic" aria-label="Choose lesson"></select>
+              <label for="voiceSelect" class="sr-only">Choose voice</label>
+              <select id="voiceSelect" aria-label="Choose voice"></select>
+              <label class="listen-control-label" for="speechRate">
+                <span>Speed</span>
+                <select id="speechRate">
+                  <option value="0.75">0.75×</option>
+                  <option value="1" selected>1×</option>
+                  <option value="1.25">1.25×</option>
+                  <option value="1.5">1.5×</option>
+                  <option value="2">2×</option>
+                </select>
+              </label>
+              <label class="listen-control-label" for="speechPitch">
+                <span>Pitch <small id="pitchValue">1.0</small></span>
+                <input type="range" id="speechPitch" min="0.5" max="1.5" step="0.1" value="1.0" aria-label="Speech pitch" />
+              </label>
+            </div>
+
+            <div class="listen-progress-bar" aria-label="Playback progress">
+              <div class="progress-track">
+                <div id="listenProgress" style="width: 0%"></div>
+              </div>
+              <span id="listenProgressText" class="progress-text">Sentence 0 / 0</span>
+            </div>
+
+            <article id="listenText" class="listen-text" tabindex="0" role="region" aria-label="Lesson sentence text"></article>
+
+            <div class="audio-controls" role="group" aria-label="Audio controls">
+              <button type="button" class="btn ghost icon-text-btn" id="prevSentence" aria-label="Previous sentence" title="Previous sentence">⏮ <span>Prev</span></button>
+              <button type="button" class="btn primary icon-text-btn" id="playSpeech" aria-label="Play audio lesson" title="Play audio">▶ <span>Listen</span></button>
+              <button type="button" class="btn ghost icon-text-btn" id="pauseSpeech" aria-label="Pause audio lesson" title="Pause audio">⏸ <span>Pause</span></button>
+              <button type="button" class="btn ghost icon-text-btn" id="nextSentence" aria-label="Next sentence" title="Next sentence">⏭ <span>Next</span></button>
+              <button type="button" class="btn ghost icon-text-btn" id="repeatSentence" aria-label="Repeat current sentence" title="Repeat sentence">↻ <span>Repeat</span></button>
+            </div>
           </section>
-          <aside class="card recall-box"><span class="eyebrow">AFTER LISTENING</span><h3>🧠 No-looking recall</h3><p id="listenRecallQuestion">Listen to a lesson first.</p><textarea id="listenRecallAnswer" placeholder="Explain it from memory…"></textarea><button class="btn primary" id="checkRecallBtn">Reveal answer</button><div id="listenRecallFeedback" class="feedback hidden"></div></aside>
+
+          <aside class="card recall-box" aria-labelledby="recallBoxHeading">
+            <span class="eyebrow">AFTER LISTENING</span>
+            <h3 id="recallBoxHeading">🧠 No-looking recall</h3>
+            <p id="listenRecallQuestion">Listen to a lesson first.</p>
+            <label for="listenRecallAnswer" class="sr-only">Explain the lesson concept from memory</label>
+            <textarea id="listenRecallAnswer" placeholder="Explain it from memory…"></textarea>
+            <button type="button" class="btn primary" id="checkRecallBtn">Reveal answer</button>
+            <div id="listenRecallFeedback" class="feedback hidden" role="region" aria-live="polite"></div>
+          </aside>
         </div>
       </section>
 
-      <section class="view" id="view-progress">
-        <div class="section-intro"><span class="eyebrow">YOUR DATA</span><h2>Progress, not fake completion.</h2></div>
+      <!-- 6. FOCUS MODE VIEW -->
+      <section class="view" id="view-focus" aria-labelledby="focusHeading">
+        <div class="section-intro">
+          <span class="chip">FOCUS MODE</span>
+          <h2 id="focusHeading">Distraction-free cognition chamber.</h2>
+          <p>Single-tasking environment designed for uninterrupted focus and speed calibration.</p>
+        </div>
+
+        <div class="focus-shell">
+          <div class="focus-controls-bar">
+            <div class="focus-timer-pill" aria-label="Session timer">
+              <span class="timer-glyph" aria-hidden="true">⏱</span>
+              <span id="focusTimer">25:00</span>
+            </div>
+            <div class="focus-actions-group" role="group" aria-label="Focus session actions">
+              <button type="button" class="btn ghost btn-sm" id="focusStartBtn">▶ Start</button>
+              <button type="button" class="btn ghost btn-sm" id="focusPauseBtn">⏸ Pause</button>
+              <button type="button" class="btn ghost btn-sm" id="focusExitBtn">✕ Exit Focus</button>
+              <button type="button" class="btn ghost btn-sm" id="focusGrayscaleToggle" aria-label="Toggle grayscale focus" title="Toggle grayscale mode">◐ Grayscale</button>
+            </div>
+          </div>
+
+          <div id="focusCard" class="card focus-card">
+            <div class="focus-card-header">
+              <span id="focusSubject" class="chip">FOCUS DRILL</span>
+              <span id="focusCounter" class="counter-badge">Question 1</span>
+            </div>
+            <div class="focus-question-area">
+              <h2 id="focusQuestionText">Enter the zone. Press Start to initiate focus reps.</h2>
+              <pre class="code-block hidden" id="focusCodeBlockContainer"><code id="focusCodeBlock"></code></pre>
+            </div>
+
+            <div class="choices-grid hidden" id="focusChoicesGrid" role="group" aria-label="Focus choice options"></div>
+
+            <form id="focusAnswerForm" class="focus-answer-row">
+              <label for="focusAnswerInput" class="sr-only">Your focused answer</label>
+              <input type="text" id="focusAnswerInput" autocomplete="off" placeholder="Answer here…" />
+              <button type="submit" class="btn primary" id="focusSubmitBtn">Submit</button>
+            </form>
+
+            <div id="focusFeedback" class="feedback hidden" role="region" aria-live="polite"></div>
+
+            <div class="focus-footer-actions">
+              <button type="button" class="btn ghost hidden" id="focusNextBtn">Next Question →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. PROGRESS VIEW -->
+      <section class="view" id="view-progress" aria-labelledby="progressHeading">
+        <div class="section-intro">
+          <span class="eyebrow">YOUR DATA</span>
+          <h2 id="progressHeading">Progress, not fake completion.</h2>
+        </div>
+
         <div class="stats-grid">
-          <article class="stat card"><span>Total attempts</span><strong id="totalAttempts">0</strong><small>Every real answer counts.</small></article>
-          <article class="stat card"><span>Correct</span><strong id="totalCorrect">0</strong><small>Accuracy over tapping complete.</small></article>
-          <article class="stat card"><span>Accuracy</span><strong id="overallAccuracy">0%</strong><small>Across all subjects.</small></article>
-          <article class="stat card"><span>Best streak</span><strong id="bestStreak">0 days</strong><small>Stored locally.</small></article>
+          <article class="stat card">
+            <span class="stat-label">Total attempts</span>
+            <strong id="totalAttempts" class="stat-value">0</strong>
+            <small>Every real answer counts.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">Correct</span>
+            <strong id="totalCorrect" class="stat-value">0</strong>
+            <small>Accuracy over tapping complete.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">Accuracy</span>
+            <strong id="overallAccuracy" class="stat-value">0%</strong>
+            <small>Across all subjects.</small>
+          </article>
+          <article class="stat card">
+            <span class="stat-label">Best streak</span>
+            <strong id="bestStreak" class="stat-value">0 days</strong>
+            <small>Stored locally.</small>
+          </article>
         </div>
-        <div class="card panel"><div class="panel-head"><div><span class="eyebrow">SUBJECT MASTERY</span><h3>Where to focus next</h3></div></div><div id="masteryBars" class="mastery-bars"></div></div>
+
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">SUBJECT MASTERY</span>
+              <h3>Where to focus next</h3>
+            </div>
+          </div>
+          <div id="masteryBars" class="mastery-bars"></div>
+        </div>
+
+        <div class="two-col charts-grid">
+          <div class="card panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">ACTIVITY VOLUME</span>
+                <h3>Last 7 Days Practice</h3>
+              </div>
+            </div>
+            <div id="activityChart" class="chart-container" aria-label="7-day activity chart"></div>
+          </div>
+
+          <div class="card panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">ACCURACY TREND</span>
+                <h3>Subject Accuracy Breakdown</h3>
+              </div>
+            </div>
+            <div id="accuracyChart" class="chart-container" aria-label="Subject accuracy breakdown chart"></div>
+          </div>
+        </div>
+
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">MISTAKE AUDIT</span>
+              <h3>Recent Mistakes</h3>
+            </div>
+          </div>
+          <div id="recentMistakes" class="mistakes-list">
+            <div class="empty-state">No mistakes recorded yet. Train to test your limits.</div>
+          </div>
+        </div>
       </section>
 
-      <section class="view" id="view-settings">
-        <div class="section-intro"><span class="eyebrow">LOCAL SETTINGS</span><h2>Make BrainForge fit your focus.</h2></div>
+      <!-- 8. STUDY PLANNER VIEW -->
+      <section class="view" id="view-planner" aria-labelledby="plannerHeading">
+        <div class="section-intro">
+          <span class="chip">STUDY PLANNER</span>
+          <h2 id="plannerHeading">Targeted workouts tailored to your schedule.</h2>
+          <p>Generate a balanced training regimen based on memory decay, weakest skills, and available time.</p>
+        </div>
+
+        <div class="planner-layout">
+          <div class="card panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">STEP 1: SELECT DURATION</span>
+                <h3>How much time do you have?</h3>
+              </div>
+            </div>
+            <div class="duration-controls-wrap">
+              <label for="planTarget" class="control-label">
+                <span>Target Study Time:</span>
+                <select id="planTarget" class="plan-target-select">
+                  <option value="5">5 minutes (Micro Sprint)</option>
+                  <option value="10">10 minutes (Quick Tune-up)</option>
+                  <option value="15" selected>15 minutes (Standard Reps)</option>
+                  <option value="25">25 minutes (Deep Pomodoro)</option>
+                  <option value="45">45 minutes (Mastery Block)</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="card panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">STEP 2: REVIEW PLAN</span>
+                <h3 id="plannerPlanTitle">Generated Regimen</h3>
+              </div>
+              <button type="button" class="btn primary" id="startPlanBtn">Start Planned Session ⚡</button>
+            </div>
+            <div id="planDisplay" class="plan-display-area"></div>
+          </div>
+
+          <div class="card panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">OVERRIDE OPTIONS</span>
+                <h3>Custom Preferences</h3>
+              </div>
+            </div>
+            <div id="plannerOverrides" class="overrides-grid">
+              <label class="switch-row" for="overrideDueOnly">
+                <span><b>Focus on Due Reviews Only</b><small>Spend available time catching up on spaced repetition backlog.</small></span>
+                <input type="checkbox" id="overrideDueOnly" />
+              </label>
+              <label class="switch-row" for="overrideIncludeMath">
+                <span><b>Include Mental Math Warmup</b><small>Calibrate speed and mental agility in first 2 minutes.</small></span>
+                <input type="checkbox" id="overrideIncludeMath" checked />
+              </label>
+              <label class="switch-row" for="overrideHardOnly">
+                <span><b>High-Difficulty Mode</b><small>Exclude beginner concepts and prioritize challenging problems.</small></span>
+                <input type="checkbox" id="overrideHardOnly" />
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. CONTENT LIBRARY VIEW -->
+      <section class="view" id="view-library" aria-labelledby="libraryHeading">
+        <div class="section-intro">
+          <span class="chip">CONTENT LIBRARY</span>
+          <h2 id="libraryHeading">Curriculum Bank & Flashcard Vault.</h2>
+          <p>Search questions, filter by subject or difficulty, and build your own custom flashcards.</p>
+        </div>
+
+        <div class="library-toolbar card">
+          <div class="search-input-wrap">
+            <label for="librarySearch" class="sr-only">Search questions and concepts</label>
+            <input type="search" id="librarySearch" placeholder="Search questions, topics, concepts, code…" autocomplete="off" />
+          </div>
+          <div class="filters-row">
+            <label class="filter-field" for="librarySubject">
+              <span>Subject</span>
+              <select id="librarySubject">
+                <option value="all">All Subjects</option>
+                <option value="math">Mental Math</option>
+                <option value="science">Science</option>
+                <option value="gk">General Knowledge</option>
+                <option value="cs">Computer Science</option>
+                <option value="coding">Coding</option>
+              </select>
+            </label>
+            <label class="filter-field" for="libraryDifficulty">
+              <span>Difficulty</span>
+              <select id="libraryDifficulty">
+                <option value="all">All Difficulties</option>
+                <option value="1">Level 1 (Easy)</option>
+                <option value="2">Level 2 (Medium)</option>
+                <option value="3">Level 3 (Hard)</option>
+              </select>
+            </label>
+            <label class="filter-field" for="filterTopic">
+              <span>Topic</span>
+              <select id="filterTopic">
+                <option value="all">All Topics</option>
+              </select>
+            </label>
+            <label class="filter-field" for="filterType">
+              <span>Type</span>
+              <select id="filterType">
+                <option value="all">All Types</option>
+                <option value="recall">Active Recall</option>
+                <option value="mcq">Multiple Choice</option>
+                <option value="code">Code Tracing</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">QUESTION BANK</span>
+              <h3 id="libraryCount">Curriculum Questions</h3>
+            </div>
+          </div>
+          <div id="libraryResults" class="library-grid"></div>
+        </div>
+
+        <div class="two-col library-extras">
+          <section class="card panel" aria-labelledby="createCardHeading">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">CREATE CARD</span>
+                <h3 id="createCardHeading">Add Custom Flashcard</h3>
+              </div>
+            </div>
+            <form id="flashcardForm" class="flashcard-form">
+              <div class="form-group">
+                <label for="fcFront">Front Prompt / Question</label>
+                <textarea id="fcFront" rows="2" placeholder="e.g. What is the time complexity of binary search?" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="fcBack">Back Answer / Explanation</label>
+                <textarea id="fcBack" rows="2" placeholder="e.g. O(log n) because the search space halves at every step." required></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fcSubject">Subject</label>
+                  <select id="fcSubject">
+                    <option value="cs">Computer Science</option>
+                    <option value="coding">Coding</option>
+                    <option value="science">Science</option>
+                    <option value="gk">General Knowledge</option>
+                    <option value="math">Mental Math</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="fcTags">Tags (comma-separated)</label>
+                  <input type="text" id="fcTags" placeholder="e.g. algorithms, trees" />
+                </div>
+              </div>
+              <button type="submit" class="btn primary" id="saveFlashcardBtn">Save Flashcard</button>
+            </form>
+          </section>
+
+          <section class="card panel" aria-labelledby="customCardsHeading">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">YOUR VAULT</span>
+                <h3 id="customCardsHeading">Custom Flashcards</h3>
+              </div>
+            </div>
+            <div id="flashcardList" class="flashcard-list">
+              <div class="empty-state">No custom cards created yet. Create your first card above.</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- 10. SETTINGS VIEW -->
+      <section class="view" id="view-settings" aria-labelledby="settingsHeading">
+        <div class="section-intro">
+          <span class="eyebrow">LOCAL SETTINGS</span>
+          <h2 id="settingsHeading">Make BrainForge fit your focus.</h2>
+        </div>
+
         <div class="settings-grid">
-          <section class="card setting-card"><h3>Focus</h3><label class="switch-row"><span><b>Grayscale mode</b><small>Reduce visual stimulation.</small></span><input type="checkbox" id="grayscaleSetting" /></label><label class="switch-row"><span><b>Reduce motion</b><small>Calmer transitions.</small></span><input type="checkbox" id="motionSetting" /></label></section>
-          <section class="card setting-card"><h3>Data</h3><p>Your attempts, mastery and review schedule are stored in IndexedDB on this device.</p><div class="stack-actions"><button class="btn ghost" id="exportBtn">Export backup</button><label class="btn ghost file-btn">Import backup<input type="file" id="importInput" accept=".json,application/json" /></label><button class="btn danger" id="resetBtn">Reset local progress</button></div></section>
+          <section class="card setting-card" aria-labelledby="appearanceHeading">
+            <h3 id="appearanceHeading">Appearance & Theme</h3>
+            <div class="theme-setting-block">
+              <label for="themeSetting" class="setting-subhead">Theme Mode</label>
+              <select id="themeSetting" class="setting-select">
+                <option value="system">System Default</option>
+                <option value="dark">Dark Theme</option>
+                <option value="light">Light Theme</option>
+              </select>
+            </div>
+            <label class="switch-row" for="grayscaleSetting">
+              <span><b>Grayscale mode</b><small>Reduce visual stimulation and color distractions.</small></span>
+              <input type="checkbox" id="grayscaleSetting" />
+            </label>
+            <label class="switch-row" for="motionSetting">
+              <span><b>Reduce motion</b><small>Calmer transitions and disable ambient animations.</small></span>
+              <input type="checkbox" id="motionSetting" />
+            </label>
+          </section>
+
+          <section class="card setting-card" aria-labelledby="trainPrefHeading">
+            <h3 id="trainPrefHeading">Training Preferences</h3>
+            <label class="select-row" for="sessionLengthSetting">
+              <span><b>Questions per session</b><small>Standard batch size for training sessions.</small></span>
+              <select id="sessionLengthSetting">
+                <option value="5">5 questions</option>
+                <option value="10" selected>10 questions</option>
+                <option value="15">15 questions</option>
+                <option value="20">20 questions</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="card setting-card" aria-labelledby="dataHeading">
+            <h3 id="dataHeading">Data & Privacy</h3>
+            <p>Your attempts, mastery and review schedule are stored in IndexedDB on this device.</p>
+            <div class="stack-actions">
+              <button type="button" class="btn ghost" id="exportBtn">Export backup</button>
+              <label class="btn ghost file-btn" for="importInput">
+                <span>Import backup</span>
+                <input type="file" id="importInput" accept=".json,application/json" />
+              </label>
+              <button type="button" class="btn danger" id="resetBtn">Reset local progress</button>
+            </div>
+          </section>
+
+          <section class="card setting-card" aria-labelledby="aboutHeading">
+            <h3 id="aboutHeading">About BrainForge</h3>
+            <p>Local-first cognitive training platform. No trackers, no accounts, offline-native.</p>
+            <div class="version-tag">
+              <span>Application Version:</span>
+              <strong id="appVersion">BrainForge v2.0.0</strong>
+            </div>
+          </section>
         </div>
       </section>
     </main>
   </div>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js"></script>
+
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>

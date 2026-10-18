@@ -47,5 +47,5 @@ test('activation deletes prior BrainForge caches and leaves other apps alone', a
   const event = { waitUntil(promise) { this.promise = promise; } };
   handlers.activate(event);
   await event.promise;
-  assert.deepEqual(removed, ['brainforge-v1']);
+  assert.deepEqual(removed, ['brainforge-v1', 'brainforge-v2']);
 });
