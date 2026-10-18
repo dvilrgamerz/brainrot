@@ -1,8 +1,8 @@
-name: BrainForge PWA checks
+name: BrainForge V2 CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, feat/*]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -21,6 +21,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check sw.js && node --check app.js
-      - run: node --test tests/*.test.mjs
-      - run: test -s index.html && test -s manifest.webmanifest
+      - name: Syntax check service worker and all JS modules
+        run: node --check sw.js js/*.js
+      - name: Run all unit and integration test suites
+        run: node --test tests/*.test.mjs
+      - name: Validate static assets and icons
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s manifest.webmanifest
+          test -s assets/icons/icon-192.svg
+          test -s assets/icons/icon-512.svg

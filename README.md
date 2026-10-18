@@ -3,54 +3,99 @@
 <p align="center"><a href="https://github.com/dvilrgamerz"><strong>Developer profile</strong></a> · <a href="https://github.com/dvilrgamerz/brainrot"><strong>Source</strong></a></p>
 <!-- /DVILR PROJECT COVER -->
 
-# BrainForge 🧠
+# BrainForge V2 🧠
 
 **Train. Learn. Remember.**
 
-BrainForge is a local-first learning and brain-training web app focused on real recall instead of fake “mark complete” progress.
+BrainForge is a dependency-free, production-quality, local-first learning and cognitive-training web application. It is engineered around genuine active recall, deterministic answer validation, adaptive difficulty calibration, and spaced repetition.
 
-## V1 features
+---
 
-- Math mental-speed practice
-- Science active recall
-- GK / general knowledge
-- Computer Science fundamentals
-- Coding questions
-- Spaced-repetition memory queue
-- Listening Mode using the browser's built-in Text-to-Speech
-- Sentence-by-sentence playback with speed and voice controls
-- No-looking recall after listening
-- Local progress using IndexedDB
-- Local settings using localStorage
-- Export / import JSON backups
-- Grayscale focus mode
-- Offline PWA caching
-- Responsive mobile UI
+## ⚡ What's New in V2
 
-## Memory schedule
+- **Modular Static Architecture:** Zero frameworks, zero bundlers, pure native ES modules (`js/`).
+- **Curriculum Bank (260+ Questions):**
+  - **Mental Math:** Procedural math engine generating 14 topics with 5 difficulty levels, step-by-step explanations, and concept-level memory deduplication.
+  - **Science (60 questions):** Physics, Chemistry, Biology, Earth Science, Astronomy with evidence explanations.
+  - **General Knowledge (55 questions):** Geography, World History, Cultures, Tech Evolution, Critical Thinking.
+  - **Computer Science (55 questions):** Algorithms, Data Structures, CPU & Memory, OS, Networking, Databases, Security.
+  - **Coding Practice (56 questions):** JavaScript & Python output prediction, bug identification, edge cases, code tracing.
+- **Enhanced Spaced Repetition Engine (SRS):**
+  - Standard 8-level Leitner schedule (`0 → 1 → 3 → 7 → 14 → 30 → 60 → 90` days).
+  - 4-tier recall grading: `Again` (&lt;10m), `Hard` (1d), `Good` (3d), `Easy` (7d+).
+  - Rolling 10-review history and lapse tracking stored in UTC ISO format.
+- **Adaptive Practice Engine:**
+  - Concept-level mastery evaluation (attempts, streak, accuracy, latency).
+  - Deterministic progression rules: 3+ consecutive correct to level up, 2+ consecutive errors to step down.
+- **Listening Mode:**
+  - Browser-native SpeechSynthesis with sentence-by-sentence tracking and highlighting.
+  - Variable speed (`0.75×` to `2×`) and real-time pitch slider (`0.5` to `1.5`).
+  - 18 comprehensive lessons with no-looking active recall prompts.
+- **Distraction-Free Focus Mode:**
+  - Minimalist cognition chamber with configurable countdown timer, keyboard shortcuts, and grayscale toggle.
+- **Personalized Study Planner:**
+  - Generates balanced training workouts for 5, 10, 15, 25, or 45-minute targets.
+  - Overrides for review backlog focus, mental math warmup, and difficulty filtering.
+- **Custom Flashcard Vault:**
+  - Create, tag, filter, review, and delete personal cards in IndexedDB.
+- **System-Adaptive Theme System:**
+  - Automatic Dark/Light mode matching OS preference, with manual cycle toggle.
+  - Full WCAG AA color contrast compliance, reduce-motion support, and grayscale mode.
+- **Offline PWA:**
+  - Installable application with service worker v3 caching and standalone manifest icons.
+- **Zero Tracker / Account-Free Privacy:**
+  - 100% stored in IndexedDB (`brainforge-db` v2) and localStorage.
+  - Full JSON backup export and validated import with XSS sanitization.
 
-Correct recalls move farther apart: today → 1 day → 3 days → 7 days → 14 days → 30 days → 60 days → 90 days.
+---
 
-A missed answer lowers the memory level and brings the concept back sooner.
+## 🧠 Memory Schedule
 
-## Run locally
+| Level | Interval | Description |
+|---|---|---|
+| **0** | Same day | New or lapsed concept |
+| **1** | 1 day | Initial successful recall |
+| **2** | 3 days | Short-term consolidation |
+| **3** | 7 days | Weekly retention checkpoint |
+| **4** | 14 days | Bi-weekly reinforcement |
+| **5** | 30 days | Monthly retention milestone |
+| **6** | 60 days | Long-term memory transfer |
+| **7** | 90 days | Consolidated knowledge base |
 
-No build step is required. Clone the repository and serve the folder with any local static server.
+---
 
-Example: `python -m http.server 5173`
+## 🛠️ Running Locally
 
-Then open `http://localhost:5173`.
+BrainForge requires no build step or package installations. Serve the directory with any static web server:
 
-Text-to-Speech uses voices installed by your browser/device, so available voices vary by device.
+```bash
+# Using Python
+python -m http.server 5173
 
-## Data and privacy
+# Using Node
+npx serve -l 5173 .
+```
 
-BrainForge does not require an account. Progress is stored in IndexedDB on the current browser/device. Settings are stored in localStorage. Use Settings → Export backup if you want a copy of your progress.
+Then navigate to `http://localhost:5173`.
 
-Clearing browser site data can erase local progress.
+---
 
-## Project goal
+## 🧪 Automated Testing
 
-BrainForge is built around active recall, spaced repetition, focused single-task sessions, accuracy before speed, listening plus recall, and real practice instead of completion buttons.
+BrainForge includes comprehensive unit and integration test suites executed with Node's native test runner (`node:test`):
 
-Built as a dependency-free static web app for GitHub Pages, Netlify, Vercel, or any static host.
+```bash
+# Run all 8 test suites (80+ unit and integration tests)
+node --test tests/*.test.mjs
+
+# Syntax check all modules and service worker
+node --check sw.js js/*.js
+```
+
+---
+
+## 🔒 Data & Privacy
+
+- No sign-ups or user accounts required.
+- All learning attempts, recall history, and custom cards remain strictly on your device.
+- Use **Settings → Export backup** to download a portable JSON copy of your progress.
