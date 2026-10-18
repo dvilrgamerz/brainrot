@@ -1,0 +1,15 @@
+# Node
+node_modules/
+.npm/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.bak
